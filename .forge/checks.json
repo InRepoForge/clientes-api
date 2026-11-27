@@ -1,0 +1,16 @@
+{
+  "preparar": [],
+  "checks": [
+    {
+      "nome": "testes",
+      "cmd": [
+        "mvn",
+        "-B",
+        "-q",
+        "-o",
+        "test"
+      ],
+      "timeout_s": 900
+    }
+  ]
+}
