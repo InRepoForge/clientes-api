@@ -1,6 +1,7 @@
 package com.exemplo.clientes.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.exemplo.clientes.domain.Cliente;
@@ -27,6 +28,17 @@ class ClienteServiceTest {
         when(repository.findAll()).thenReturn(List.of(ana));
 
         assertThat(service.listar()).containsExactly(ana);
+    }
+
+    @Test
+    void deveSalvarClienteQuandoDadosValidos() {
+        when(repository.save(any(Cliente.class))).thenAnswer(invocacao -> invocacao.getArgument(0));
+
+        var criado = service.criar("Diego Rocha", "12345678901", "diego@example.com");
+
+        assertThat(criado.getNome()).isEqualTo("Diego Rocha");
+        assertThat(criado.getCpf()).isEqualTo("12345678901");
+        assertThat(criado.getEmail()).isEqualTo("diego@example.com");
     }
 
     @Test

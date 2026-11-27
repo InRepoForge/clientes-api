@@ -17,4 +17,8 @@ public class ClienteService {
     public List<Cliente> listar() {
         return repository.findAll();
     }
+
+    public Cliente criar(String nome, String cpf, String email) {
+        return repository.save(new Cliente(nome, cpf, email));
+    }
 }
